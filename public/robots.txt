@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /login
+Disallow: /register
+Disallow: /dashboard
+Disallow: /profile
+Disallow: /bookmarks
+Disallow: /email
+Disallow: /forgot-password
+Disallow: /reset-password
+
+Sitemap: https://bagiresep.fun/sitemap.xml
