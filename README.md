@@ -988,6 +988,11 @@ tests/
   <br>
   <sub>Senior Software Engineer & Web Developer</sub>
   <br>
+  <a href="https://gempurbudianarki.space/">gempurbudianarki.space</a>
+  <br>
+  <br>
+  <sub>Live at <a href="https://bagiresep.fun/">bagiresep.fun</a></sub>
+  <br>
   <br>
   <sub>&copy; 2026 BagiResep. All rights reserved.</sub>
 </p>
