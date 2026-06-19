@@ -47,7 +47,7 @@ Setiap komponen dalam proyek ini dirancang dengan Single Responsibility Principl
 
 Situs sudah production-ready dan dapat diakses di **[bagiresep.fun](https://bagiresep.fun)**.
 
-Dibangun oleh **[Gempur Budi Anarki](https://gempurbudianarki.space/)** : Senior Software Engineer & Web Developer.
+Dibangun oleh **[Gempur Budi Anarki](https://gempurbudianarki.space/)** : Junior Software Engineer & Web Developer.
 
 ## Teknologi
 
@@ -881,7 +881,7 @@ tests/
   <br>
   <strong>Gempur Budi Anarki</strong>
   <br>
-  <sub>Senior Software Engineer & Web Developer</sub>
+  <sub>Junior Software Engineer & Web Developer</sub>
   <br>
   <a href="https://gempurbudianarki.space/">gempurbudianarki.space</a>
   <br>
