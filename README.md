@@ -41,13 +41,13 @@
 
 ## Tentang Proyek
 
-**BagiResep** adalah platform berbagi resep masakan Indonesia dengan dukungan bilingual penuh (Indonesia dan Inggris). Proyek ini dibangun di atas Laravel 10 dengan penerapan prinsip-prinsip Object-Oriented Programming secara menyeluruh — Encapsulation, Inheritance, dan Polymorphism — yang terintegrasi dalam arsitektur Model-View-Controller.
+**BagiResep** adalah platform berbagi resep masakan Indonesia dengan dukungan bilingual penuh (Indonesia dan Inggris). Proyek ini dibangun di atas Laravel 10 dengan penerapan prinsip-prinsip Object-Oriented Programming secara menyeluruh : Encapsulation, Inheritance, dan Polymorphism : yang terintegrasi dalam arsitektur Model-View-Controller.
 
 Setiap komponen dalam proyek ini dirancang dengan Single Responsibility Principle. Controller hanya bertugas menerima request dan mengembalikan response. Business logic dienkapsulasi dalam Service Layer. Authorization logic dipusatkan di Policy class. Database interaction ditangani sepenuhnya oleh Eloquent ORM. Pemisahan concern ini memastikan kode tetap maintainable, testable, dan mudah dikembangkan.
 
 Situs sudah production-ready dan dapat diakses di **[bagiresep.fun](https://bagiresep.fun)**.
 
-Dibangun oleh **[Gempur Budi Anarki](https://gempurbudianarki.space/)** — Senior Software Engineer & Web Developer.
+Dibangun oleh **[Gempur Budi Anarki](https://gempurbudianarki.space/)** : Senior Software Engineer & Web Developer.
 
 ## Teknologi
 
@@ -88,7 +88,7 @@ Dibangun oleh **[Gempur Budi Anarki](https://gempurbudianarki.space/)** — Seni
 - Login dengan rate limiting (6 percobaan per menit)
 - Lupa password dan reset password via Gmail SMTP
 - Cookie consent notification
-- Penggantian bahasa: Indonesia / Inggris — seluruh konten bilingual
+- Penggantian bahasa: Indonesia / Inggris : seluruh konten bilingual
 
 ### Anggota (User)
 
@@ -153,11 +153,11 @@ Menggunakan Google Translate sebagai engine utama dengan MyMemory sebagai fallba
 
 Proyek ini menerapkan tiga prinsip fundamental OOP di seluruh arsitekturnya. Berikut penjelasan setiap prinsip dengan contoh kode nyata dari proyek ini.
 
-### Encapsulation — Service Layer
+### Encapsulation : Service Layer
 
 **Prinsip**: Encapsulation menyembunyikan detail implementasi internal di balik interface publik. Konsumen sebuah class hanya berinteraksi dengan method public-nya; logika internal, struktur data, dan dependensi tetap private.
 
-**Implementasi**: Aplikasi memisahkan HTTP request handling (Controller) dari business logic (Service). Controller memvalidasi input dan mendelegasikan ke Service. Service mengenkapsulasi operasi kompleks — database transaction, image processing, translation, dan relationship synchronization — di balik method signature yang bersih.
+**Implementasi**: Aplikasi memisahkan HTTP request handling (Controller) dari business logic (Service). Controller memvalidasi input dan mendelegasikan ke Service. Service mengenkapsulasi operasi kompleks : database transaction, image processing, translation, dan relationship synchronization : di balik method signature yang bersih.
 
 ```
 HTTP Request
@@ -179,7 +179,7 @@ Service Layer (encapsulated logic)
 Eloquent Models (data layer)
 ```
 
-**Contoh Kode** — Controller hanya sebagai orchestrator. Semua business logic berada di Service:
+**Contoh Kode** : Controller hanya sebagai orchestrator. Semua business logic berada di Service:
 
 ```php
 // App\Http\Controllers\Web\RecipeController.php
@@ -245,11 +245,11 @@ class RecipeService
 
 Method `RecipeService::create()` mengenkapsulasi tujuh operasi berbeda dalam satu database transaction: pembuatan polymorphic child, translation, image processing, recipe insertion, morph association, category synchronization, dan ingredient synchronization. Controller tidak mengetahui detail implementasi apapun dari operasi-operasi tersebut.
 
-### Inheritance — Polymorphic Relations
+### Inheritance : Polymorphic Relations
 
 **Prinsip**: Inheritance memungkinkan sebuah class mewarisi properti dan perilaku dari class induknya. Dalam Eloquent ORM Laravel, semua model mewarisi dari `Illuminate\Database\Eloquent\Model`, sehingga memperoleh kemampuan database interaction tanpa implementasi eksplisit.
 
-**Implementasi — Base Controller**:
+**Implementasi : Base Controller**:
 
 Semua controller dalam aplikasi ini mewarisi dari `App\Http\Controllers\Controller`, yang mewarisi dari Laravel base controller dan mengimpor dua trait:
 
@@ -260,12 +260,12 @@ class Controller extends BaseController
 }
 ```
 
-- `AuthorizesRequests` — menyediakan method `$this->authorize()` yang digunakan di seluruh resource controller
-- `ValidatesRequests` — menyediakan method `$this->validate()` untuk inline validation
+- `AuthorizesRequests` : menyediakan method `$this->authorize()` yang digunakan di seluruh resource controller
+- `ValidatesRequests` : menyediakan method `$this->validate()` untuk inline validation
 
 Rantai inheritance ini berarti setiap controller otomatis mewarisi kemampuan authorization dan validation tanpa duplikasi kode.
 
-**Implementasi — Eloquent Model Inheritance**:
+**Implementasi : Eloquent Model Inheritance**:
 
 Model `User` mendemonstrasikan multiple inheritance melalui trait composition:
 
@@ -277,11 +277,11 @@ class User extends Authenticatable implements MustVerifyEmail
 ```
 
 Setiap trait menyumbangkan kapabilitas spesifik:
-- `HasApiTokens` — manajemen token Sanctum untuk API authentication
-- `HasFactory` — dukungan model factory untuk testing dan seeding
-- `Notifiable` — pengiriman notifikasi email (verifikasi, reset password)
-- `HasRoles` — integrasi Spatie RBAC (pengecekan role dan permission)
-- `SoftDeletes` — penghapusan non-destruktif dengan timestamp `deleted_at`
+- `HasApiTokens` : manajemen token Sanctum untuk API authentication
+- `HasFactory` : dukungan model factory untuk testing dan seeding
+- `Notifiable` : pengiriman notifikasi email (verifikasi, reset password)
+- `HasRoles` : integrasi Spatie RBAC (pengecekan role dan permission)
+- `SoftDeletes` : penghapusan non-destruktif dengan timestamp `deleted_at`
 
 Model `Recipe` mewarisi dari `Model` dan mengkomposisi trait `HasFactory` dan `SoftDeletes`. Method `booted()` melakukan override terhadap lifecycle hook parent:
 
@@ -308,7 +308,7 @@ protected static function booted(): void
 
 Ini mendemonstrasikan method overriding dalam rantai inheritance: `booted()` memperluas proses boot parent dengan menambahkan auto-generation slug saat create/update dan pembersihan storage saat force-delete.
 
-### Polymorphism — Recipeable Interface
+### Polymorphism : Recipeable Interface
 
 **Prinsip**: Polymorphism memungkinkan objek dengan tipe berbeda diperlakukan melalui interface yang sama. Satu model `Recipe` dapat mereferensikan `FoodRecipe` atau `DrinkRecipe` tanpa perlu mengetahui tipe konkretnya.
 
@@ -418,7 +418,7 @@ private function createRecipeable(array $data)
 
 Tidak diperlukan perubahan pada model `Recipe`, service yang sudah ada, atau view manapun.
 
-### Observer Pattern — Event-Driven Rating
+### Observer Pattern : Event-Driven Rating
 
 **Prinsip**: Observer pattern mendefinisikan dependensi one-to-many antar objek. Ketika satu objek berubah state, semua dependennya diberitahu dan diupdate otomatis.
 
@@ -650,7 +650,7 @@ public function edit(Recipe $recipe)
 
 | Mekanisme | Implementasi |
 |---|---|
-| XML Sitemap | `/sitemap.xml` — dinamis: semua resep + kategori + halaman statis |
+| XML Sitemap | `/sitemap.xml` : dinamis: semua resep + kategori + halaman statis |
 | Robots.txt | Konten publik di-allow, auth/admin di-block |
 | Meta Tags | `title`, `description`, `keywords` unik per halaman via Blade `@yield` |
 | Open Graph | `og:title`, `og:description`, `og:image`, `og:type`, `og:locale` |
@@ -745,8 +745,8 @@ MAIL_FROM_NAME="BagiResep"
 
 Letakkan file berikut di `storage/app/public/sampul/`:
 
-- `sampuldepan.webp` — Background hero landing page
-- `sampuldalam.webp` — Background header halaman internal
+- `sampuldepan.webp` : Background hero landing page
+- `sampuldalam.webp` : Background header halaman internal
 
 ## API Reference
 
